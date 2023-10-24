@@ -1,0 +1,51 @@
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Subsampling Result
+      </h1>
+      <h2>for {{subsamplingResult?.filename}}</h2>
+      <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
+    </div>
+  </div>
+</div>
+
+<div class="ui text" id="barplotContainer">
+
+  <div class="ui equal width grid segment ui sticky">
+    <div class="row">
+      <div class="column text-center" *ngFor="let col of containerCols">
+        <span class="ui text">
+          <div class="ui smallbg horizontal statistic">
+            <div class="value">
+              {{col}}
+            </div>
+            <div class="label">
+              %
+            </div>
+          </div>       
+        </span>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="option">
+    <button class="ui primary button" (click)="toggleBarplotShareYlim()">Toggle shared Y-axis</button>
+  </div>
+  
+
+
+  <div class="ui equal width grid segment" *ngFor="let category of containerRows | keyvalue">
+    <div class="row" >
+      <span class="ui text big self-center">
+        {{category.key}}</span>
+    </div>
+    <div class="row" >
+      <div  style="height: 350px;" id="{{container}}" class="column" *ngFor="let container of category.value"></div>
+    </div>
+  </div>
+  <div>
+
+</div>
