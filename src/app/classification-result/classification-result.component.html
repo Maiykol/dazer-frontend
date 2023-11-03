@@ -1,0 +1,61 @@
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+
+    <!-- <div class="ui breadcrumb inverted">
+      <a class="section">{{classificationResult?.filename}}</a>
+      <i class="right angle icon divider"></i>
+      <a class="section">Subsampling</a>
+      <i class="right angle icon divider"></i>
+      <div class="active section">Classification</div>
+    </div> -->
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Classification Result
+      </h1>
+      <h2>for {{classificationResult?.filename}}</h2>
+      <h2>Finding "{{ classificationResult?.targetValue }}" from column "{{ classificationResult?.targetColumn }}"</h2>
+
+
+  <div class="option ui inverted segment">
+    <button class="ui inverted primary button">
+      Start task
+    </button>
+
+  </div>
+      <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
+    </div>
+
+    <div class="ui text container">
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="ui segment">
+  <app-classification-survival></app-classification-survival>
+</div>
+
+<div class="ui segment">
+  <h2 class="ui center aligned header">Classsifier Performances</h2>
+
+  <div>Metric:</div>
+  <div class="ui selection dropdown" id="metricDropdown">
+    <i class="dropdown icon"></i>
+    <div class="text"></div>
+  </div>
+
+  <div class="ui text" id="classificationPlotContainer">
+    <div id="classificationResultPlot"></div>
+  </div>
+</div>
+
+<div class="ui segment">
+  <h2 class="ui center aligned header">Random Forest Feature Importances</h2>
+  <div class="ui text" id="randomForestFeatureImportancesPlotContainer">
+    <div id="randomForestFeatureImportancesPlot"></div>
+  </div>
+</div>
+

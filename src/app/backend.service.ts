@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { ClassificationResult, SubsampleResult } from './interfaces';
 
 
 @Injectable({
@@ -50,10 +51,14 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public startSubsampling(session_id: string, filename: string, targetCol: string, keepRatioColumns: string[], ratio: number): Promise<any> {
+  public getFileColumnsSubsampling(subsamplingId: string): Promise<any> {
+    const request = `${this.API}file_columns_subsampling/${subsamplingId}`;
+    return this.getRequest(request);
+  }
+
+  public startSubsampling(session_id: string, filename: string, keepRatioColumns: string[], ratio: number): Promise<any> {
     const request = `${this.API}subsample/${session_id}/${filename}`;
     const payload = {
-      targetCol, 
       keepRatioColumns,
       ratio
     }
@@ -61,8 +66,27 @@ export class BackendService {
     return this.postRequest(request, payload);
   }
 
-  public getSubsamplingResult(subsamplingId: string): Promise<any> {
+  public getSubsamplingResult(subsamplingId: string): Promise<SubsampleResult> {
     const request = `${this.API}subsample_result/${subsamplingId}`;
+    return this.getRequest(request);
+  }
+
+  public startClassificationTask(subsampleId: string, targetColumn: string, targetValue: string): Promise<any> {
+    const request = `${this.API}classification/${subsampleId}`;
+    const payload = {
+      targetColumn,
+      targetValue
+    }
+    return this.postRequest(request, payload);
+  }
+
+  public getClassificationResult(classificationTaskId: string): Promise<any> {
+    const request = `${this.API}classification_result/${classificationTaskId}`;
+    return this.getRequest(request);
+  }
+
+  public getClassificationStatus(classificationTaskId: string): Promise<ClassificationResult> {
+    const request = `${this.API}classification_status/${classificationTaskId}`;
     return this.getRequest(request);
   }
 

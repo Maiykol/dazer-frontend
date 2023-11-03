@@ -15,7 +15,7 @@ export class SubsamplingComponent implements OnInit {
   constructor(public backend: BackendService, public storage: StorageService, public data: SubsamplingDataService, private router: Router) { }
 
   public sessionId: string = '';
-  public sessionFiles: string[] = [];
+  public sessionFiles: any = {};
   public sessionFilesSubsampled: any = {};
   public fileColumns: string[] = [];
   public filename: string = '';
@@ -46,16 +46,24 @@ export class SubsamplingComponent implements OnInit {
       return
     }
 
-    const result = await fetch(`http://localhost:8000/api/file_upload/${this.data.sessionId}/${file.name}`, {
+    let filename = file.name;
+    // check if filename exists
+    const attempts = 1000;
+    let attempt = 1;
+    while (filename in this.sessionFilesSubsampled) {
+      filename = file.name.replace('.tsv', `${attempt}.tsv`);
+      attempt ++;
+      if (attempt > attempts) {
+        alert('Filename already taken!')
+        return
+      }
+    }
+
+    const result = await fetch(`http://localhost:8000/api/file_upload/${this.data.sessionId}/${filename}`, {
       method: 'PUT',
       body: file
     }).then((response) => {
-        if (this.data.sessionId === '') {
-          console.log('something wrong, session should be known by now')
-        }
-        this.sessionFiles.unshift(file.name);
-        this.openSubsampleModal(file.name);
-
+        this.openSubsampleModal(filename);
       }).catch((response) => {
       console.log(response)
     })
@@ -65,7 +73,7 @@ export class SubsamplingComponent implements OnInit {
     console.log('open modal filename', filename)
     this.filename = filename;
 
-    $('.ui.modal').modal('show');
+    $('#subsampling_modal.ui.modal').modal('show');
   }
 
   public openSubsamplingResult(subsampleId: string) {

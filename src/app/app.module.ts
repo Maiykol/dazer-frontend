@@ -11,6 +11,9 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SubsamplingModalComponent } from './subsampling-modal/subsampling-modal.component';
 import { SubsamplingResultComponent } from './subsampling-result/subsampling-result.component';
+import { ClassificationModalComponent } from './classification-modal/classification-modal.component';
+import { ClassificationResultComponent } from './classification-result/classification-result.component';
+import { ClassificationSurvivalComponent } from './classification-survival/classification-survival.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { SubsamplingResultComponent } from './subsampling-result/subsampling-res
     NavbarComponent,
     FooterComponent,
     SubsamplingModalComponent,
-    SubsamplingResultComponent
+    SubsamplingResultComponent,
+    ClassificationModalComponent,
+    ClassificationResultComponent,
+    ClassificationSurvivalComponent
   ],
   imports: [
     BrowserModule,

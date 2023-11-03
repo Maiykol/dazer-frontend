@@ -22,12 +22,18 @@
       <div class="ui middle aligned divided list">
           <div class="item" *ngFor="let file of sessionFiles">
               <div class="right floated content">
-                  <div class="ui primary button" *ngIf="sessionFilesSubsampled[file] !== undefined" (click)="openSubsamplingResult(sessionFilesSubsampled[file][0])">Show</div>
-                  <div class="ui button" *ngIf="sessionFilesSubsampled[file] === undefined" (click)="openSubsampleModal(file)">Subsample</div>
+                  <div class="ui primary button" *ngIf="sessionFilesSubsampled[file.filename] !== undefined" (click)="openSubsamplingResult(sessionFilesSubsampled[file.filename][0])">Show</div>
+                  <div class="ui button" *ngIf="sessionFilesSubsampled[file.filename] === undefined" (click)="openSubsampleModal(file.filename)">Subsample</div>
                   <div class="ui red button">Delete</div>
               </div>
               <div class="content">
-                  {{file}}
+                  {{file.filename}}
+              </div>
+              <div *ngIf="file.rowsRemoved" class="ui info message">
+                <div class="header">
+                  Rows removed
+                </div>
+                <p>{{file.rowsRemoved}} rows were removed because they contained NaN values.</p>
               </div>
           </div>
       </div>

@@ -27,7 +27,7 @@ export class SubsamplingModalComponent implements OnInit {
     this.backend.getFileColumns(this.data.sessionId, filename).then((response) => {
 
       this.fileColumns = response['columns'];
-      this.categoricalFileColumns = response['categoricalColumns'];
+      this.categoricalFileColumns = response['categoricalColumnsValues'];
       this.filename = filename;
 
       // dropdown for target column
@@ -57,7 +57,7 @@ export class SubsamplingModalComponent implements OnInit {
   }
 
   public subsampleModalSuccess() {
-    this.backend.startSubsampling(this.data.sessionId, this.filename, this.targetColumn, this.keepRatioColumns, 0.2);
+    this.backend.startSubsampling(this.data.sessionId, this.filename, this.keepRatioColumns, 0.2);
   }
 
 }

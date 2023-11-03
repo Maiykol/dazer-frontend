@@ -23,6 +23,8 @@ export class SubsamplingResultComponent implements OnInit {
   public containerCols: string[] = [];
   public barplotSharedYAxis = false;
   private maxCountsPerCategory: {[key: string]: number} = {};
+  private columns: string[]  = [];
+  private categoricalColumnsValues: any = {};
 
   private barplotLayout: any = {
     title: false,
@@ -46,46 +48,53 @@ export class SubsamplingResultComponent implements OnInit {
     this.subsamplingResult = await this.backend.getSubsamplingResult(this.subsamplingId);
 
     // columns header
+
+    console.log('ere')
     this.subsamplingResult.ratios.sort().forEach((ratio: string) => {
       this.containerCols.push(`${Number(ratio)*100}`);
     });
     this.containerCols.push(`test ${Number(this.subsamplingResult.testRatio) * 100}`);
 
-    for (const [category, category_data] of Object.entries(this.subsamplingResult.data)) {
+    for (const [category, categoryData] of Object.entries(this.subsamplingResult.data)) {
       this.containerRows[category] = [];
       for (const ratio of this.subsamplingResult.ratios as string[]) {
-        const ratio_data = category_data[ratio];
+        const ratioData = categoryData[ratio];
         const plotDiv = `${category}_${ratio}`;
         this.containerRows[category].push(plotDiv)
       }
       // test data
       const ratio = this.subsamplingResult.testLabel;
-      const ratio_data = category_data[ratio];
+      const ratioData = categoryData[ratio];
       const plotDiv = `${category}_${ratio}`;
       this.containerRows[category].push(plotDiv)
     }
     this.cd.detectChanges();
 
-    for(const [category, category_data] of Object.entries(this.subsamplingResult.data)) {
+    for (const [category, categoryData] of Object.entries(this.subsamplingResult.data)) {
       for (const ratio of this.subsamplingResult.ratios as string[]) {
-        const ratio_data = category_data[ratio];
+        const ratioData = categoryData[ratio];
         const plotDiv = `${category}_${ratio}`;
-        this.plotBar(ratio, plotDiv, Object.keys(ratio_data), Object.values(ratio_data))
+        this.plotBar(ratio, plotDiv, Object.keys(ratioData), Object.values(ratioData))
         if (ratio === '1') {
-          this.maxCountsPerCategory[category] = Math.max(...Object.values(ratio_data));
+          this.maxCountsPerCategory[category] = Math.max(...Object.values(ratioData));
         }
       }
-      // test data
+      // show the test data
       const ratio = this.subsamplingResult.testLabel;
-      const ratio_data = category_data[ratio];
+      const ratioData = categoryData[ratio];
       const plotDiv = `${category}_${ratio}`;
-      this.plotBar(ratio, plotDiv, Object.keys(ratio_data), Object.values(ratio_data))
+      this.plotBar(ratio, plotDiv, Object.keys(ratioData), Object.values(ratioData))
     } 
+
 
     $('.ui.sticky')
       .sticky({
         context: '#barplotContainer'
       })
+      ;
+
+    $('.popup')
+      .popup()
       ;
     
     this.toggleBarplotShareYlim();
@@ -131,6 +140,15 @@ export class SubsamplingResultComponent implements OnInit {
       }
     }
     this.barplotSharedYAxis = !this.barplotSharedYAxis;
+  }
+
+  public async openClassificationeModal() {
+    $('#classification_modal.ui.modal').modal('show');
+  }
+
+  public formatTestColLabel(label: string) {
+    const value = label.split(' ').pop();
+    return value
   }
 
 }

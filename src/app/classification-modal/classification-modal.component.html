@@ -1,4 +1,4 @@
-<div class="ui modal" id="subsampling_modal">
+<div class="ui modal" id="classification_modal">
   <i class="close icon"></i>
   <div class="header">
     Subsample parameters
@@ -6,13 +6,13 @@
 
     <div class="content">
         <div class="description">
-            <div class="ui header">Enter your parameters</div>
-            <p>In order to subsample from your data, you ned to define some criteria such as the target column of your classification problem.</p>
-            <p>Further, you can specify which features should be represented in similar distributions as in the original data to prevent a bias introduced by the subsampling procedure.</p>
+            <div class="ui header">Classification</div>
+            <p>Train random forests on your subsampled data to assess the impact of adding more data to your train-dataset.</p>
+            <p>For now, only binary classification problems are supported. Therefore, you will need to select a target column containing the labels as well as a target value.</p>
         </div>
 
         <form class="ui form">
-            <!-- <div class="field">
+            <div class="field">
                 <label>Target Column</label>
                 <div class="ui fluid search selection dropdown" id="targetColumnDropdown">
                     <input type="hidden" name="receipt">
@@ -26,9 +26,9 @@
                         </ng-container>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
-             <!-- <div class="field">
+             <div class="field">
                 <label>Target Value</label>
                 <div class="ui fluid search selection dropdown" id="targetValueDropdown">
                     <input type="hidden" name="receipt">
@@ -42,23 +42,8 @@
                         </ng-container>
                     </div>
                 </div>
-            </div> -->
-
-            <div class="field">
-                <label>Keep ratio while subsampling</label>
-                <div class="ui fluid multiple search selection dropdown" id="keepRatioColumnsDropdown">
-                    <input type="hidden" name="receipt">
-                    <i class="dropdown icon"></i>
-                    <div class="default text"></div>
-                    <div class="menu">
-                        <ng-container *ngFor="let col of fileColumns">
-                            <div class="item" arrt.data-value="col" attr.data-text="col" >
-                            {{ col }}
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
             </div>
+
         </form>
 
     </div>
@@ -68,7 +53,7 @@
         <button class="ui black deny button">
         Close
         </button>
-        <button class="ui positive right labeled icon button" (click)="subsampleModalSuccess()">
+        <button class="ui positive right labeled icon button" (click)="classificationModalSuccess()">
         Start
         <i class="checkmark icon"></i>
         </button>

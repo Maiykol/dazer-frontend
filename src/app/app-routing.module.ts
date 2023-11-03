@@ -4,12 +4,14 @@ import { NoPageFoundComponentComponent } from './no-page-found-component/no-page
 import { SubsamplingComponent } from './subsampling/subsampling.component';
 import { SubsamplingResultComponent } from './subsampling-result/subsampling-result.component';
 import { HomeComponent } from './home/home.component';
+import { ClassificationResultComponent } from './classification-result/classification-result.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/subsampling', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'subsampling', component: SubsamplingComponent },
   { path: 'subsampling/:subsampling', component: SubsamplingResultComponent },
+  { path: 'classification/:classification', component: ClassificationResultComponent },
   { path: '**', component: NoPageFoundComponentComponent },
 ];
 

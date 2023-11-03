@@ -6,20 +6,38 @@
         Subsampling Result
       </h1>
       <h2>for {{subsamplingResult?.filename}}</h2>
+
+
+  <div class="option ui inverted segment">
+    <button class="ui inverted orange button" (click)="toggleBarplotShareYlim()">Toggle shared Y-axis</button>
+    <button class="ui inverted primary button" (click)="openClassificationeModal()">
+      Start task
+    </button>
+
+  </div>
       <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
     </div>
+
+    <div class="ui text container">
+
+    </div>
+
   </div>
 </div>
+
 
 <div class="ui text" id="barplotContainer">
 
   <div class="ui equal width grid segment ui sticky">
     <div class="row">
-      <div class="column text-center" *ngFor="let col of containerCols">
+      <div class="column text-center" *ngFor="let col of containerCols; let i = index; let first = first ;let last = last;">
         <span class="ui text">
-          <div class="ui smallbg horizontal statistic">
-            <div class="value">
+          <div class="ui smallbg horizontal statistic" [class.test-label]="last">
+            <div class="value" *ngIf="!last">
               {{col}}
+            </div>
+             <div class="value popup" *ngIf="last" data-title="Test" attr.data-content="Test data is composed from {{formatTestColLabel(col)}}% of the whole dataset.">
+              Test
             </div>
             <div class="label">
               %
@@ -30,12 +48,6 @@
     </div>
     
   </div>
-
-  <div class="option">
-    <button class="ui primary button" (click)="toggleBarplotShareYlim()">Toggle shared Y-axis</button>
-  </div>
-  
-
 
   <div class="ui equal width grid segment" *ngFor="let category of containerRows | keyvalue">
     <div class="row" >
@@ -49,3 +61,5 @@
   <div>
 
 </div>
+
+<app-classification-modal [setSubsamplingId]="subsamplingId"></app-classification-modal>
