@@ -1,0 +1,40 @@
+    <div class="ui segment">
+        <div class="ui two column centered grid twelve wide self-center">
+            <div class="center aligned one column row">
+                <h2 class="ui header">Subsampling Parameters</h2>
+            </div>
+
+            <div class="center aligned one column row">
+                <table class="ui definition table">
+                    <tbody>
+                        <tr>
+                            <td>Filename</td>
+                            <td>{{ subsamplingResult?.filename }}</td>
+                        </tr>
+                        <tr>
+                            <td>Test Ratio</td>
+                            <td>{{ subsamplingResult?.testRatio }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ratios</td>
+                            <td>{{ subsamplingResult?.ratios }}</td>
+                        </tr>
+                        <tr>
+                            <td>Keep Ratio Columns</td>
+                            <td>{{ subsamplingResult?.keepRatioColumns }}</td>
+                        </tr>
+                        <tr>
+                            <td>Allowed Deviation</td>
+                            <td>{{ subsamplingResult?.allowedDeviation }}</td>
+                        </tr>
+                        <tr>
+                            <td>Random States</td>
+                            <td>{{
+                                subsamplingResult?.iterationRandomStates
+                            }}</td>
+                        </tr>
+                    </tbody></table
+                >
+            </div>
+        </div>
+    </div>

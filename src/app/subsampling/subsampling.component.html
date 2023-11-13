@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<ng-container *ngIf="sessionFiles.length > 0">
+<!-- <ng-container *ngIf="sessionFiles.length > 0">
   <h1 class="ui center aligned header">Uploaded files</h1>
   <div class="ui text container segment">
       <div class="ui middle aligned divided list">
@@ -24,6 +24,7 @@
               <div class="right floated content">
                   <div class="ui primary button" *ngIf="sessionFilesSubsampled[file.filename] !== undefined" (click)="openSubsamplingResult(sessionFilesSubsampled[file.filename][0])">Show</div>
                   <div class="ui button" *ngIf="sessionFilesSubsampled[file.filename] === undefined" (click)="openSubsampleModal(file.filename)">Subsample</div>
+                  <app-button-share  *ngIf="sessionFilesSubsampled[file.filename] !== undefined" [colorInverted]="false" path="subsampling/{{sessionFilesSubsampled[file.filename][0]}}"></app-button-share>
                   <div class="ui red button">Delete</div>
               </div>
               <div class="content">
@@ -38,6 +39,8 @@
           </div>
       </div>
   </div>
-</ng-container>
+</ng-container> -->
 
-<app-subsampling-modal [setFileName]="filename"></app-subsampling-modal>
+<app-file-menu></app-file-menu>
+
+<app-subsampling-modal></app-subsampling-modal>

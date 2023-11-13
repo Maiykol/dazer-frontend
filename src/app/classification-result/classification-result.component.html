@@ -1,7 +1,6 @@
 <div class="pusher">
-  <div class="ui inverted vertical masthead center aligned segment">
-
-    <!-- <div class="ui breadcrumb inverted">
+    <div class="ui inverted vertical masthead center aligned segment">
+        <!-- <div class="ui breadcrumb inverted">
       <a class="section">{{classificationResult?.filename}}</a>
       <i class="right angle icon divider"></i>
       <a class="section">Subsampling</a>
@@ -9,53 +8,170 @@
       <div class="active section">Classification</div>
     </div> -->
 
-    <div class="ui text container">
-      <h1 class="ui inverted header">
-        Classification Result
-      </h1>
-      <h2>for {{classificationResult?.filename}}</h2>
-      <h2>Finding "{{ classificationResult?.targetValue }}" from column "{{ classificationResult?.targetColumn }}"</h2>
+        <div class="ui text container">
+            <h1 class="ui inverted header"> Classification Result </h1>
+            <h2>for {{ classificationResult?.filename }}</h2>
+            <h2
+                >Finding "{{ classificationResult?.targetValue }}" from column
+                "{{ classificationResult?.targetColumn }}"</h2
+            >
+            <div class="option ui inverted segment">
+                <!-- <button class="ui inverted primary button"> Start task </button> -->
+                <app-button-share buttonClasses="inverted"></app-button-share>
+            </div>
+            <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
+        </div>
 
+        <div class="ui text container"> </div>
+    </div>
+</div>
 
-  <div class="option ui inverted segment">
-    <button class="ui inverted primary button">
-      Start task
-    </button>
+<div class="ui container">
+    <ng-container *ngIf="classificationResult?.data !== undefined">
+        <div class="ui segment">
+            <h2 class="ui center aligned header">Classifier Performances</h2>
 
-  </div>
-      <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
+            <div class="ui info message">
+                <i class="close icon"></i>
+                <div class="header"
+                    ><i class="info circle icon"></i> Information to the
+                    performances
+                </div>
+                <p>
+                    The best performing classifiers (based on their f1-score)
+                    from the grid search and the k-fold cross validation were
+                    saved. Below, you can evaluate these best classifiers based
+                    on different performance metrics to get a more complete
+                    picture.
+                </p>
+            </div>
+
+            <div>Metric:</div>
+            <div class="ui selection dropdown" id="metricDropdown">
+                <i class="dropdown icon"></i>
+                <div class="text"></div>
+            </div>
+
+            <div>Merge iterations:</div>
+            <div
+                class="ui toggle checkbox"
+                *ngIf="
+                    classificationResult?.randomStates &&
+                    (classificationResult?.randomStates)!.length > 1
+                ">
+                <input
+                    type="checkbox"
+                    name="public"
+                    [(ngModel)]="mergeIterationsPerformances"
+                    (ngModelChange)="this.plotClassificationResults()" />
+                <label></label>
+            </div>
+
+            <div class="ui text" id="classificationPlotContainer">
+                <div id="classificationResultPlot"></div>
+            </div>
+        </div>
+
+        <div class="ui segment">
+            <h2 class="ui center aligned header">Impact Analysis</h2>
+
+            <div class="ui info message">
+                <i class="close icon"></i>
+                <div class="header"
+                    ><i class="info circle icon"></i> Information to the impact
+                    analysis
+                </div>
+                <p>
+                    The impact analysis serves to estimate the effect of
+                    different sample sizes in real-life problems using your
+                    dataset. Given a measurable difference in the handling of
+                    entities in the predicted class compared to the other
+                    classes—such as in the case of survival outcomes where
+                    targeted treatment is applied to a specific class—the
+                    benefit for each entity (e.g., patients) can be
+                    approximated. Keep in mind that this is purely a statistical
+                    analysis. <br />
+                    Additionally, the expected performance of a purely random
+                    classifier is shown.
+                </p>
+            </div>
+            <div class="ui form">
+                <div class="fields text-center">
+                    <div class="field self-center">
+                        <label>Best case</label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            [(ngModel)]="bestCaseNumber"
+                            (ngModelChange)="plotImpactEstimation()" />
+                    </div>
+                    <div class="field self-center">
+                        <label>Default case</label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            [(ngModel)]="defaultCaseNumber"
+                            (ngModelChange)="plotImpactEstimation()" />
+                    </div>
+                </div>
+            </div>
+            <div class="ui text" id="classificationPlotContainer">
+                <div id="impactEstimationPlot"></div>
+            </div>
+        </div>
+
+        <div class="ui segment">
+            <h2 class="ui center aligned header"
+                >Random Forest Feature Importances</h2
+            >
+            <div class="ui info message">
+                <i class="close icon"></i>
+                <div class="header"
+                    ><i class="info circle icon"></i> Information to the random
+                    forest feature importance values</div
+                >
+                <p>
+                    The random forest feature importance values are "Random
+                    Forest"-specific and based on the gini impurity used in the
+                    Random Forest classifiers. The higher a value is, the more
+                    important a feature was to the classification process. If
+                    more than 50 features exist, the plot is reduced to the 50
+                    features with the highest mean importance over all resulting
+                    classifiers. Keep in mind, that categorical features with
+                    high cardinality tend to be overrepresented in Random
+                    Forests. To avoid this, check out the feature scores using
+                    permutation importance.
+                </p>
+            </div>
+            <div
+                class="ui text"
+                id="randomForestFeatureImportancesPlotContainer">
+                <div id="randomForestFeatureImportancesPlot"></div>
+            </div>
+        </div>
+
+        <app-classification-result-parameters
+            class="self-center"
+            [setClassifcationId]="
+                classificationId
+            "></app-classification-result-parameters>
+    </ng-container>
+
+    <div [class.hidden]="classificationResult?.data !== undefined">
+      <div class="ui huge header text-center">Classification Task</div>
+
+      <div class="ui active progress" data-percent="1" id="progressBar">
+        <div class="bar"><div class="progress"></div></div>
+        <div class="label"></div>
+      </div>
     </div>
 
-    <div class="ui text container">
+    <div class="ui huge header text-center">Subsampling</div>
 
-    </div>
+    <app-subsampling-result-plots
+        [setSubsamplingId]="subsamplingId"></app-subsampling-result-plots>
 
-  </div>
+    <app-subsampling-result-parameters
+        class="self-center"
+        [setSubsamplingId]="subsamplingId"></app-subsampling-result-parameters>
 </div>
-
-
-<div class="ui segment">
-  <app-classification-survival></app-classification-survival>
-</div>
-
-<div class="ui segment">
-  <h2 class="ui center aligned header">Classsifier Performances</h2>
-
-  <div>Metric:</div>
-  <div class="ui selection dropdown" id="metricDropdown">
-    <i class="dropdown icon"></i>
-    <div class="text"></div>
-  </div>
-
-  <div class="ui text" id="classificationPlotContainer">
-    <div id="classificationResultPlot"></div>
-  </div>
-</div>
-
-<div class="ui segment">
-  <h2 class="ui center aligned header">Random Forest Feature Importances</h2>
-  <div class="ui text" id="randomForestFeatureImportancesPlotContainer">
-    <div id="randomForestFeatureImportancesPlot"></div>
-  </div>
-</div>
-

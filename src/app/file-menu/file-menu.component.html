@@ -1,0 +1,106 @@
+<div class="ui text container segment" id="fileMenu">
+    <div class="ui tree basic styled accordion">
+        <ng-container *ngFor="let file of sessionFiles">
+            <div class="title">
+                <i class="dropdown icon"></i>
+                <i class="file icon"></i>
+                <span class="bold"> File: {{ file.filename }} </span>
+                <div class="accordion-description-spacing description"
+                    >
+                    <app-button-new-subsample
+                        buttonClasses="tiny tertiary"
+                        filename="{{ file.filename }}">
+                    </app-button-new-subsample>
+                    <app-button-delete
+                        buttonClasses="tiny tertiary"
+                        path="delete/file/{{ this.sessionId }}/{{
+                            file.filename
+                        }}">
+                    </app-button-delete>
+            </div>
+            </div>
+            <div class="content">
+                <div class="basic styled accordion">
+                    <ng-container
+                        *ngFor="let subsampleTask of file.subsampleTasks">
+                        <div class="title">
+                            <i class="dropdown icon"></i>
+                            <i class="block layout icon"></i>
+                            <span class="bold">
+                                Subsample: {{ subsampleTask.timestamp  * 1000 | date: 'yyyy/MM/dd h:mm:ss a'}}
+                            </span>
+                            <div
+                                class="accordion-description-spacing description">
+                                <app-button-show
+                                    buttonClasses="tiny tertiary"
+                                    path="subsampling/{{
+                                        subsampleTask.subsampleTaskId
+                                    }}">
+                                </app-button-show>
+                                <app-button-delete
+                                    buttonClasses="tiny tertiary"
+                                    path="delete/subsample/{{
+                                        subsampleTask.subsampleTaskId
+                                    }}">
+                                </app-button-delete>
+                                <app-button-share
+                                    buttonClasses="tiny tertiary"
+                                    path="subsampling/{{
+                                        subsampleTask.subsampleTaskId
+                                    }}"></app-button-share
+                            ></div>
+                        </div>
+                        <div class="content">
+                            <div class="ui list">
+                                <ng-container
+                                    *ngFor="
+                                        let classificationTask of subsampleTask.classificationTasks
+                                    ">
+                                    <div class="item">
+                                        <div class="content ui classification segment">
+                                            <div class="header">
+                                                <i class="crosshairs icon"></i>
+                                                Classification:
+                                                {{
+                                                    classificationTask.timestamp  * 1000 | date: 'yyyy/MM/dd h:mm:ss a'
+                                                }}</div
+                                            >
+                                            <div class="description">
+                                                <app-button-show
+                                                    buttonClasses="tiny tertiary"
+                                                    path="subsampling/{{
+                                                        subsampleTask.subsampleTaskId
+                                                    }}/{{
+                                                        classificationTask.classificationId
+                                                    }}">
+                                                </app-button-show>
+                                                <app-button-delete
+                                                    buttonClasses="tiny tertiary"
+                                                    path="delete/classification/{{
+                                                        classificationTask.classificationId
+                                                    }}">
+                                                </app-button-delete>
+
+                                                <app-button-share
+                                                    buttonClasses="tiny tertiary"
+                                                    path="subsampling/{{
+                                                        subsampleTask.subsampleTaskId
+                                                    }}/{{
+                                                        classificationTask.classificationId
+                                                    }}"></app-button-share>
+                                            </div>
+                                            {{classificationTask.progress}}
+                                            <div class="ui bottom attached active progress" [attr.data-percent]="classificationTask.progress * 100">
+                                                <div class="bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

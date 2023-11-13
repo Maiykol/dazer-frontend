@@ -1,0 +1,33 @@
+<div class="ui segment">
+    <div class="ui two column centered grid twelve wide self-center">
+        <div class="center aligned one column row">
+            <h2 class="ui header">Classification Parameters</h2>
+        </div>
+
+        <div class="center aligned one column row">
+            <table class="ui definition table">
+                <tbody>
+                    <tr>
+                        <td>Filename</td>
+                        <td>{{ classificationResult?.filename }}</td>
+                    </tr>
+                    <tr>
+                        <td>Target Feature</td>
+                        <td>{{ classificationResult?.targetColumn }}</td>
+                    </tr>
+                    <tr>
+                        <td>Target Value</td>
+                        <td>{{ classificationResult?.targetValue }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cross Validation k</td>
+                        <td>{{ classificationResult?.crossValidationK }}</td>
+                    </tr>
+                    <tr>
+                        <td>Random States</td>
+                        <td>{{ classificationResult?.randomStates }}</td>
+                    </tr>
+            </table>
+        </div>
+    </div>
+</div>

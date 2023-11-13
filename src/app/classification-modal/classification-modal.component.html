@@ -1,26 +1,39 @@
 <div class="ui modal" id="classification_modal">
-  <i class="close icon"></i>
-  <div class="header">
-    Subsample parameters
-  </div>
+    <i class="close icon"></i>
+    <div class="header"> Subsample parameters </div>
 
     <div class="content">
         <div class="description">
             <div class="ui header">Classification</div>
-            <p>Train random forests on your subsampled data to assess the impact of adding more data to your train-dataset.</p>
-            <p>For now, only binary classification problems are supported. Therefore, you will need to select a target column containing the labels as well as a target value.</p>
+            <p
+                >Train random forests on your subsampled data to assess the
+                impact of adding more data to your train-dataset.</p
+            >
+            <p
+                >For now, only binary classification problems are supported.
+                Therefore, you will need to select a target column containing
+                the labels as well as a target value.</p
+            >
         </div>
 
         <form class="ui form">
             <div class="field">
                 <label>Target Column</label>
-                <div class="ui fluid search selection dropdown" id="targetColumnDropdown">
-                    <input type="hidden" name="receipt">
+                <div
+                    class="ui fluid search selection dropdown"
+                    id="targetColumnDropdown">
+                    <input type="hidden" name="receipt" />
                     <i class="dropdown icon"></i>
                     <div class="default text"></div>
                     <div class="menu">
-                        <ng-container *ngFor="let col of categoricalFileColumns | keyvalue">
-                            <div class="item" arrt.data-value="col" attr.data-text="col" >
+                        <ng-container
+                            *ngFor="
+                                let col of categoricalFileColumns | keyvalue
+                            ">
+                            <div
+                                class="item"
+                                arrt.data-value="col"
+                                attr.data-text="col">
                                 {{ col.key }}
                             </div>
                         </ng-container>
@@ -28,15 +41,22 @@
                 </div>
             </div>
 
-             <div class="field">
+            <div class="field">
                 <label>Target Value</label>
-                <div class="ui fluid search selection dropdown" id="targetValueDropdown">
-                    <input type="hidden" name="receipt">
+                <div
+                    class="ui fluid search selection dropdown"
+                    id="targetValueDropdown">
+                    <input type="hidden" name="receipt" />
                     <i class="dropdown icon"></i>
-                    <div class="default text">Select the target column first</div>
+                    <div class="default text"
+                        >Select the target column first</div
+                    >
                     <div class="menu">
                         <ng-container *ngFor="let value of targetColumnValues">
-                            <div class="item" arrt.data-value="value" attr.data-text="value" >
+                            <div
+                                class="item"
+                                arrt.data-value="value"
+                                attr.data-text="value">
                                 {{ value }}
                             </div>
                         </ng-container>
@@ -44,18 +64,35 @@
                 </div>
             </div>
 
-        </form>
+            <div class="ui accordion"> <!-- styled fluid  -->
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                    Options
+                </div>
+                <div class="content">
 
+                    <div class="field transition hidden">
+                        <label>Cross validation k</label>
+                        <select class="ui selection dropdown" name="crossValidationK" [(ngModel)]="crossValidationK" id="crossValidationK">
+                        </select>
+                    </div>
+
+                    <div class="field transition hidden">
+                        <label>Iterations (with different seeds; select a value from 1 to 5)</label>
+                        <input type="number" name="nRandomStates" max="5" min="1" step="1" [(ngModel)]="nRandomStates" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 
-
     <div class="actions">
-        <button class="ui black deny button">
-        Close
-        </button>
-        <button class="ui positive right labeled icon button" (click)="classificationModalSuccess()">
-        Start
-        <i class="checkmark icon"></i>
+        <button class="ui black deny button"> Close </button>
+        <button
+            class="ui positive right labeled icon button"
+            (click)="classificationModalSuccess()">
+            Start
+            <i class="checkmark icon"></i>
         </button>
     </div>
 </div>

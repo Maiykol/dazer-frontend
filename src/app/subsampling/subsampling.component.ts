@@ -16,25 +16,17 @@ export class SubsamplingComponent implements OnInit {
 
   public sessionId: string = '';
   public sessionFiles: any = {};
-  public sessionFilesSubsampled: any = {};
   public fileColumns: string[] = [];
   public filename: string = '';
 
   async ngOnInit() {
 
-    this.data.sessionId = this.storage.get('sessionId') || '';
-    if (this.data.sessionId === '') {
-      const session = await this.backend.getSessionId();
-      this.data.sessionId = session['session'];
-    }
+    this.sessionId = await this.storage.get('sessionId');
 
-    this.storage.set('sessionId', this.data.sessionId);
-
+    this.storage.set('sessionId', this.sessionId);
     // old session, load saved data
-    this.backend.getSessionFiles(this.data.sessionId).then((response) => {
-      console.log(response)
+    this.backend.getSessionFiles(this.sessionId).then((response) => {
       this.sessionFiles = response.sessionFiles;
-      this.sessionFilesSubsampled = response.subsampleData;
     });
     
   }
@@ -50,7 +42,7 @@ export class SubsamplingComponent implements OnInit {
     // check if filename exists
     const attempts = 1000;
     let attempt = 1;
-    while (filename in this.sessionFilesSubsampled) {
+    while (this.sessionFiles.find((e: { filename: any; }) => e.filename === filename)) {
       filename = file.name.replace('.tsv', `${attempt}.tsv`);
       attempt ++;
       if (attempt > attempts) {
@@ -59,21 +51,14 @@ export class SubsamplingComponent implements OnInit {
       }
     }
 
-    const result = await fetch(`http://localhost:8000/api/file_upload/${this.data.sessionId}/${filename}`, {
+    const result = await fetch(`http://localhost:8000/api/file_upload/${this.sessionId}/${filename}`, {
       method: 'PUT',
       body: file
     }).then((response) => {
-        this.openSubsampleModal(filename);
+      // todo
       }).catch((response) => {
       console.log(response)
     })
-  }
-
-  public async openSubsampleModal(filename: string) {
-    console.log('open modal filename', filename)
-    this.filename = filename;
-
-    $('#subsampling_modal.ui.modal').modal('show');
   }
 
   public openSubsamplingResult(subsampleId: string) {

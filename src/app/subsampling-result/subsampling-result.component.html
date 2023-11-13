@@ -5,14 +5,14 @@
       <h1 class="ui inverted header">
         Subsampling Result
       </h1>
-      <h2>for {{subsamplingResult?.filename}}</h2>
+      <h2>for {{file.filename}}</h2>
 
 
   <div class="option ui inverted segment">
-    <button class="ui inverted orange button" (click)="toggleBarplotShareYlim()">Toggle shared Y-axis</button>
     <button class="ui inverted primary button" (click)="openClassificationeModal()">
-      Start task
+      Start classification
     </button>
+    <app-button-share buttonClasses="inverted"></app-button-share>
 
   </div>
       <!-- <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div> -->
@@ -25,41 +25,9 @@
   </div>
 </div>
 
-
-<div class="ui text" id="barplotContainer">
-
-  <div class="ui equal width grid segment ui sticky">
-    <div class="row">
-      <div class="column text-center" *ngFor="let col of containerCols; let i = index; let first = first ;let last = last;">
-        <span class="ui text">
-          <div class="ui smallbg horizontal statistic" [class.test-label]="last">
-            <div class="value" *ngIf="!last">
-              {{col}}
-            </div>
-             <div class="value popup" *ngIf="last" data-title="Test" attr.data-content="Test data is composed from {{formatTestColLabel(col)}}% of the whole dataset.">
-              Test
-            </div>
-            <div class="label">
-              %
-            </div>
-          </div>       
-        </span>
-      </div>
-    </div>
-    
-  </div>
-
-  <div class="ui equal width grid segment" *ngFor="let category of containerRows | keyvalue">
-    <div class="row" >
-      <span class="ui text big self-center">
-        {{category.key}}</span>
-    </div>
-    <div class="row" >
-      <div  style="height: 350px;" id="{{container}}" class="column" *ngFor="let container of category.value"></div>
-    </div>
-  </div>
-  <div>
-
+<div class="ui container">
+  <app-subsampling-result-plots [setSubsamplingId]="subsamplingId" ></app-subsampling-result-plots>
+  <app-subsampling-result-parameters class="self-center" [setSubsamplingId]="subsamplingId"></app-subsampling-result-parameters>
 </div>
 
 <app-classification-modal [setSubsamplingId]="subsamplingId"></app-classification-modal>

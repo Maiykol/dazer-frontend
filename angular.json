@@ -31,14 +31,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less",
-              "node_modules/fomantic-ui/dist/semantic.min.css",
-              "node_modules/@fortawesome/fontawesome-svg-core/styles.css"
+                "src/styles.less"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/fomantic-ui/dist/semantic.min.js",
-              "node_modules/plotly.js/dist/plotly.min.js"
+              "node_modules/plotly.js/dist/plotly.min.js",
+              "src/assets/js/global.js"
             ]
           },
           "configurations": {

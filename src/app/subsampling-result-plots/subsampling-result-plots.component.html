@@ -1,0 +1,86 @@
+<ng-container *ngIf="subsamplingResult?.keepRatioColumns?.length === 0">
+    <div class="ui green message">
+        <div class="header"
+            ><i class="info circle icon"></i> No "keepRatioColumns" selected
+        </div>
+        <p>
+            The subsampling was successfull! You can start a classification task
+            or download the data below. Since you did not choose any
+            "keepRatioColumns", the subsampling was completely random and DAZER
+            did not preserve any distribution similarities to the original
+            dataset.
+        </p>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="subsamplingResult?.keepRatioColumns?.length">
+    <div class="ui info message">
+        <!-- <i class="close icon"></i> -->
+        <div class="header"
+            ><i class="info circle icon"></i> Information to the subsampled
+            datasets
+        </div>
+        <p>
+            The plots below show the data distribution of the
+            "keep-ratio"-columns in the data used for training. These are the
+            columns chosen by the user for DAZER to ensure to keep the value
+            distributions close to the original. If you have selected more than
+            one iteration, the value shown in the plots is the average of all
+            iterations.
+        </p>
+    </div>
+
+    <button class="ui inverted orange button" (click)="toggleBarplotShareYlim()"
+        >Toggle shared Y-axis</button
+    >
+
+    <div class="ui text" id="barplotContainer">
+        <div class="ui equal width grid segment ui sticky">
+            <div class="row subsample-plot-row">
+                <div
+                    class="column text-center"
+                    *ngFor="
+                        let col of containerCols;
+                        let i = index;
+                        let first = first;
+                        let last = last
+                    ">
+                    <span class="ui text">
+                        <div
+                            class="ui smallbg horizontal statistic"
+                            [class.test-label]="last">
+                            <div class="value" *ngIf="!last">
+                                {{ col }}
+                            </div>
+                            <div
+                                class="value popup"
+                                *ngIf="last"
+                                data-title="Test"
+                                attr.data-content="Test data is composed from {{
+                                    formatTestColLabel(col)
+                                }}% of the whole dataset.">
+                                Test
+                            </div>
+                            <div class="label"> % </div>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="ui equal width grid segment"
+            *ngFor="let category of containerRows | keyvalue">
+            <div class="row">
+                <span class="ui text big self-center"> {{ category.key }}</span>
+            </div>
+            <div class="row subsample-plot-row">
+                <div
+                    style="height: 350px"
+                    id="{{ container }}"
+                    class="column"
+                    *ngFor="let container of category.value"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>

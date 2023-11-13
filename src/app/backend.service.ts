@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
-import { ClassificationResult, SubsampleResult } from './interfaces';
+import { ClassificationResult, SessionResponse, SubsampleResult } from './interfaces';
 
 
 @Injectable({
@@ -36,7 +36,7 @@ export class BackendService {
     }
   }
 
-  public getSessionId(): Promise<any> {
+  public getSessionId(): Promise<SessionResponse> {
     const request = `${this.API}session_id`;
     return this.getRequest(request);
   }
@@ -56,26 +56,36 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public startSubsampling(session_id: string, filename: string, keepRatioColumns: string[], ratio: number): Promise<any> {
+  public startSubsampling(session_id: string, filename: string, keepRatioColumns: string[], testRatio: number, ratios: number[], nRandomStates: number): Promise<any> {
     const request = `${this.API}subsample/${session_id}/${filename}`;
+    console.log('filename', filename)
     const payload = {
       keepRatioColumns,
-      ratio
+      testRatio,
+      ratios,
+      nRandomStates
     }
 
     return this.postRequest(request, payload);
   }
 
   public getSubsamplingResult(subsamplingId: string): Promise<SubsampleResult> {
-    const request = `${this.API}subsample_result/${subsamplingId}`;
+    const request = `${this.API}subsample/result/${subsamplingId}`;
     return this.getRequest(request);
   }
 
-  public startClassificationTask(subsampleId: string, targetColumn: string, targetValue: string): Promise<any> {
+  public getFile(subsamplingId: string): Promise<any> {
+    const request = `${this.API}file/${subsamplingId}`;
+    return this.getRequest(request);
+  }
+
+  public startClassificationTask(subsampleId: string, targetColumn: string, targetValue: string, crossValidationK: number, nRandomStates: number): Promise<any> {
     const request = `${this.API}classification/${subsampleId}`;
     const payload = {
       targetColumn,
-      targetValue
+      targetValue,
+      crossValidationK,
+      nRandomStates
     }
     return this.postRequest(request, payload);
   }

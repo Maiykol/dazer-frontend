@@ -12,38 +12,6 @@
         </div>
 
         <form class="ui form">
-            <!-- <div class="field">
-                <label>Target Column</label>
-                <div class="ui fluid search selection dropdown" id="targetColumnDropdown">
-                    <input type="hidden" name="receipt">
-                    <i class="dropdown icon"></i>
-                    <div class="default text"></div>
-                    <div class="menu">
-                        <ng-container *ngFor="let col of categoricalFileColumns | keyvalue">
-                            <div class="item" arrt.data-value="col" attr.data-text="col" >
-                                {{ col.key }}
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </div> -->
-
-             <!-- <div class="field">
-                <label>Target Value</label>
-                <div class="ui fluid search selection dropdown" id="targetValueDropdown">
-                    <input type="hidden" name="receipt">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Select the target column first</div>
-                    <div class="menu">
-                        <ng-container *ngFor="let value of targetColumnValues">
-                            <div class="item" arrt.data-value="value" attr.data-text="value" >
-                                {{ value }}
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="field">
                 <label>Keep ratio while subsampling</label>
                 <div class="ui fluid multiple search selection dropdown" id="keepRatioColumnsDropdown">
@@ -53,9 +21,35 @@
                     <div class="menu">
                         <ng-container *ngFor="let col of fileColumns">
                             <div class="item" arrt.data-value="col" attr.data-text="col" >
-                            {{ col }}
+                                {{ col }}
                             </div>
                         </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui accordion"> <!-- styled fluid  -->
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                    Options
+                </div>
+                <div class="content">
+                    <div class="field transition hidden">
+                        <label>Number of subsamples</label>
+                        <select class="ui selection dropdown" name="nRatios" [(ngModel)]="nRatios" (ngModelChange)="setRatioInput()" id="ratioInput">
+                        </select>
+                        <p>(translates to subsample sizes: {{ratios}})</p>
+                    </div>
+
+                    <div class="field transition hidden">
+                        <label>Number of iterations (with different seeds)</label>
+                        <select class="ui selection dropdown" name="nRandomStates" [(ngModel)]="nRandomStates" id="randomStatesInput">
+                        </select>
+                    </div>
+
+                    <div class="field transition hidden">
+                        <label>Test data ratio</label>
+                        <input type="number" name="testRatio" max="1" min="0.0" step="0.1" [(ngModel)]="testRatio" />
                     </div>
                 </div>
             </div>

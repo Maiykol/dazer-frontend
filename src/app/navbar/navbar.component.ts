@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  public toggleFileMenuFlag = 0;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public toggleFileMenu() {
+    this.toggleFileMenuFlag = this.toggleFileMenuFlag + 1;
   }
 
 }

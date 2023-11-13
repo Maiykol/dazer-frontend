@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'subsampling', component: SubsamplingComponent },
   { path: 'subsampling/:subsampling', component: SubsamplingResultComponent },
+  { path: 'subsampling/:subsampling/:classification', component: ClassificationResultComponent },
   { path: 'classification/:classification', component: ClassificationResultComponent },
   { path: '**', component: NoPageFoundComponentComponent },
 ];
