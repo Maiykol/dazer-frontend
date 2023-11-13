@@ -1,5 +1,8 @@
 FROM node:16.17 as build-stage
 
+RUN rm ./src/environments/environment.ts
+RUN mv ./src/environments/environment.production.ts ./src/environments/environment.ts
+
 WORKDIR /app
 
 COPY package*.json ./

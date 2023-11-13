@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { ClassificationResult, SessionResponse, SubsampleResult } from './interfaces';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { ClassificationResult, SessionResponse, SubsampleResult } from './interf
 })
 export class BackendService {
 
-  API = 'http://localhost:8000/api/';
+  API = environment.API;
 
   constructor(private http: HttpClient) {
   }
