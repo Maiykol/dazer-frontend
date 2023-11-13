@@ -23,7 +23,6 @@
     "@types/jquery": "^3.5.22",
     "@types/semantic-ui": "^2.2.7",
     "fomantic-ui": "^2.9.3",
-    "fomantic-ui-less": "^2.9.3",
     "jquery": "^3.7.1",
     "plotly.js": "^1.47.4",
     "rxjs": "~7.4.0",
