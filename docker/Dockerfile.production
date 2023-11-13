@@ -1,8 +1,5 @@
 FROM node:16.17 as build-stage
 
-RUN rm -f ./src/environments/environment.ts
-RUN mv ./src/environments/environment.production.ts ./src/environments/environment.ts
-
 WORKDIR /app
 
 COPY package*.json ./
@@ -11,6 +8,9 @@ RUN n 16.17.1
 RUN npm install
 COPY ./ .
 RUN rm -rf nginx
+
+RUN rm -f src/environments/environment.ts
+RUN cp -f src/environments/environment.production.ts src/environments/environment.ts
 
 RUN npm run build -- --base-href=/dazer/
 
