@@ -9,8 +9,6 @@ RUN npm install
 COPY ./ .
 RUN rm -rf nginx
 
-COPY ./src/environments/environment.production.ts ./src/environments/environment.ts
-
 RUN npm run build -- --base-href=/dazer/
 
 FROM nginx:mainline-alpine

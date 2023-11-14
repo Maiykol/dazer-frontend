@@ -9,7 +9,7 @@ RUN npm install
 COPY ./ .
 RUN rm -rf nginx
 
-COPY ./src/environments/environment.development.ts ./src/environments/environment.ts
+COPY ./src/environments/environment.dev.ts ./src/environments/environment.prod.ts
 
 RUN npm run build -- --base-href=/dazer_dev/
 
