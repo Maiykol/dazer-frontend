@@ -13,22 +13,30 @@ export class FileMenuComponent implements OnInit {
   public sessionFiles: any = [];
   public sessionId: string = '';
 
-  constructor(private backend: BackendService, public storage: StorageService) { }
+  constructor(private backend: BackendService, public storage: StorageService, private data: SubsamplingDataService) { }
 
   async ngOnInit() {
 
     // old session, load saved data
     this.sessionId = await this.storage.get('sessionId');
+
+    this.data.fileMenuRefreshFlag$.subscribe(flag => {
+      if (flag) {
+        this.loadSessionFiles();
+      }
+    })
+
+    // initially
+    this.loadSessionFiles();
+  }
+
+  private loadSessionFiles() {
     this.backend.getSessionFiles(this.sessionId).then((response) => {
       this.sessionFiles = response.sessionFiles;
-
       setTimeout(() => {
-        console.log($('#fileMenu .progress'))
         $('#fileMenu .progress').progress();
-      }, 1000)
+      }, 500)
     });
-
-
   }
 
 }

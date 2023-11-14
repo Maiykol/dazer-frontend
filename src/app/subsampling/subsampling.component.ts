@@ -35,7 +35,20 @@ export class SubsamplingComponent implements OnInit {
   public async onFileInput(fileList: any) {
     const file = fileList[0];
     if (!file.name.endsWith('.tsv')) {
-      console.log('not a tsv')
+      // @ts-ignore
+      $.toast({
+        position: 'top center',
+        title: 'Error while uploading file!',
+        class: 'center aligned error',
+        className: {
+          toast: 'ui message'
+        },
+        showProgress: 'bottom',
+        classProgress: 'red',
+        // progressUp: true,
+        displayTime: 5000,
+        message: `The selected file is not a .tsv file. Please make sure it has the correct format.`
+      });
       return
     }
 
@@ -57,8 +70,24 @@ export class SubsamplingComponent implements OnInit {
       method: 'PUT',
       body: file
     }).then((response) => {
-      console.log('uploaded')
-      // todo
+      // @ts-ignore
+      $.toast({
+        position: 'top center',
+        title: 'File uploaded',
+        class: 'center aligned success',
+        className: {
+          toast: 'ui message'
+        },
+        showProgress: 'bottom',
+        classProgress: 'green',
+        // progressUp: true,
+        displayTime: 5000,
+        message: `Your file has beed upladed. You can always find it in the file menu if you want to delete it or use it later again..`
+      });
+      // refresh file menu
+      this.data.fileMenuRefreshFlag = true;
+      // TODO start analysis modal
+
       }).catch((response) => {
       console.log(response)
     }).finally(() => {
