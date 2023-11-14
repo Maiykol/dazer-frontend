@@ -78,7 +78,7 @@ export class SubsamplingResultPlotsComponent implements OnInit {
         const ratioData = categoryData[ratio];
         const plotDiv = `${category}_${ratio}`;
         this.plotBar(ratio, plotDiv, Object.keys(ratioData), Object.values(ratioData))
-        if (ratio === '1') {
+        if (ratio.toString() === '1') {
           this.maxCountsPerCategory[category] = Math.max(...Object.values(ratioData));
         }
       }
