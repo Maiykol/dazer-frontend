@@ -18,6 +18,7 @@ export class SubsamplingComponent implements OnInit {
   public sessionFiles: any = {};
   public fileColumns: string[] = [];
   public filename: string = '';
+  public fileUploadingFlag = false;
 
   async ngOnInit() {
 
@@ -51,13 +52,17 @@ export class SubsamplingComponent implements OnInit {
       }
     }
 
+    this.fileUploadingFlag = true;
     const result = await fetch(`http://localhost:8000/api/file_upload/${this.sessionId}/${filename}`, {
       method: 'PUT',
       body: file
     }).then((response) => {
+      console.log('uploaded')
       // todo
       }).catch((response) => {
       console.log(response)
+    }).finally(() => {
+      this.fileUploadingFlag = false;
     })
   }
 
