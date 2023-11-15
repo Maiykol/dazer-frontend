@@ -57,7 +57,7 @@
                                         let classificationTask of subsampleTask.classificationTasks
                                     ">
                                     <div class="item">
-                                        <div class="content ui classification segment">
+                                        <div class="content ui classification segment" [ngClass]="{'red tertiary inverted' : classificationTask.error}">
                                             <div class="header">
                                                 <i class="crosshairs icon"></i>
                                                 Classification:

@@ -28,6 +28,10 @@ export class FileMenuComponent implements OnInit {
 
     // initially
     this.loadSessionFiles();
+    // TODO: update every 10 seconds WITHOUT closing open accoordion tabs
+    // setInterval(() => {
+    //   this.loadSessionFiles();
+    // }, 10000)
   }
 
   private loadSessionFiles() {

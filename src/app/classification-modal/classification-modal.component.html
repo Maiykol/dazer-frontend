@@ -32,8 +32,8 @@
                             ">
                             <div
                                 class="item"
-                                arrt.data-value="col"
-                                attr.data-text="col">
+                                attr.data-value="{{col.key}}"
+                                attr.data-text="{{col.key}}">
                                 {{ col.key }}
                             </div>
                         </ng-container>
@@ -55,8 +55,8 @@
                         <ng-container *ngFor="let value of targetColumnValues">
                             <div
                                 class="item"
-                                arrt.data-value="value"
-                                attr.data-text="value">
+                                attr.data-value="{{value}}"
+                                >
                                 {{ value }}
                             </div>
                         </ng-container>

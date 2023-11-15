@@ -27,7 +27,7 @@ export class ClassificationModalComponent implements OnInit {
       return
     }
     this.backend.getFileColumnsSubsampling(subsamplingId).then((response) => {
-
+      console.log(response)
       this.fileColumns = response['columns'];
       this.categoricalFileColumns = response['categoricalColumnsValues'];
 

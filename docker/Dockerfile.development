@@ -11,7 +11,7 @@ RUN rm -rf nginx
 
 COPY ./src/environments/environment.dev.ts ./src/environments/environment.prod.ts
 
-RUN npm run build -- --base-href=/dazer_dev/
+RUN npm run build -- --base-href=/dazer/
 
 FROM nginx:mainline-alpine
 
