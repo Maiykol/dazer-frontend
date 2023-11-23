@@ -12,28 +12,28 @@
         </div>
 
         <form class="ui form">
-            <div class="field">
-                <label>Keep ratio while subsampling</label>
-                <div class="ui fluid multiple search selection dropdown" id="keepRatioColumnsDropdown">
-                    <input type="hidden" name="receipt">
-                    <i class="dropdown icon"></i>
-                    <div class="default text"></div>
-                    <div class="menu">
-                        <ng-container *ngFor="let col of fileColumns">
-                            <div class="item" arrt.data-value="col" attr.data-text="col" >
-                                {{ col }}
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </div>
-
             <div class="ui accordion"> <!-- styled fluid  -->
                 <div class="title">
                     <i class="dropdown icon"></i>
                     Options
                 </div>
                 <div class="content">
+                    <div class="field transition hidden">
+                        <label>Keep ratio while subsampling</label>
+                        <div class="ui fluid multiple search selection dropdown" id="keepRatioColumnsDropdown">
+                            <input type="hidden" name="receipt">
+                            <i class="dropdown icon"></i>
+                            <div class="default text"></div>
+                            <div class="menu">
+                                <ng-container *ngFor="let col of fileColumns">
+                                    <div class="item" arrt.data-value="col" attr.data-text="col" >
+                                        {{ col }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="field transition hidden">
                         <label>Number of subsamples</label>
                         <select class="ui selection dropdown" name="nRatios" [(ngModel)]="nRatios" (ngModelChange)="setRatioInput()" id="ratioInput">
