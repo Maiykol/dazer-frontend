@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:8000/api/'
+  API: 'https://prototypes.cosy.bio/api_dazer/api/' //'http://localhost:8000/api/'
 };
 
 /*

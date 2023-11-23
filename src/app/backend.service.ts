@@ -42,13 +42,13 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public getSessionFiles(session_id: string): Promise<any> {
-    const request = `${this.API}session_files/${session_id}`;
+  public getSessionFiles(sessionId: string): Promise<any> {
+    const request = `${this.API}session_files/${sessionId}`;
     return this.getRequest(request);
   }
 
-  public getFileColumns(session_id: string, filename: string): Promise<any> {
-    const request = `${this.API}file_columns/${session_id}/${filename}`;
+  public getFileColumns(sessionId: string, filename: string): Promise<any> {
+    const request = `${this.API}file_columns/${sessionId}/${filename}`;
     return this.getRequest(request);
   }
 
@@ -57,8 +57,8 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public startSubsampling(session_id: string, filename: string, keepRatioColumns: string[], testRatio: number, ratios: number[], nRandomStates: number, allowedDeviation: number): Promise<any> {
-    const request = `${this.API}subsample/${session_id}/${filename}`;
+  public startSubsampling(sessionId: string, filename: string, keepRatioColumns: string[], testRatio: number, ratios: number[], nRandomStates: number, allowedDeviation: number): Promise<any> {
+    const request = `${this.API}subsample/${sessionId}/${filename}`;
     const payload = {
       keepRatioColumns,
       testRatio,
@@ -66,7 +66,6 @@ export class BackendService {
       nRandomStates,
       allowedDeviation
     }
-
     return this.postRequest(request, payload);
   }
 

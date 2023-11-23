@@ -3,6 +3,7 @@ import { BackendService } from '../backend.service';
 import { StorageService } from '../storage.service';
 import { SubsamplingDataService } from '../subsampling-data.service';
 import {Router} from "@angular/router"
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -66,7 +67,7 @@ export class SubsamplingComponent implements OnInit {
     }
 
     this.fileUploadingFlag = true;
-    const result = await fetch(`http://localhost:8000/api/file_upload/${this.sessionId}/${filename}`, {
+    const result = await fetch(`${environment.API}file_upload/${this.sessionId}/${filename}`, {
       method: 'PUT',
       body: file
     }).then((response) => {
