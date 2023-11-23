@@ -38,8 +38,7 @@ export class BackendService {
   }
 
   public getSessionId(): Promise<SessionResponse> {
-    const request = `${this.API}session_id`;
-    console.log(request)
+    const request = `${this.API}session_id/`;
     return this.getRequest(request);
   }
 
