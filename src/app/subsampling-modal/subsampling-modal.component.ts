@@ -127,7 +127,38 @@ export class SubsamplingModalComponent implements OnInit {
 
   public async subsampleModalSuccess() {
     const sessionId = await this.storage.get('sessionId');
-    this.backend.startSubsampling(sessionId, this.filename, this.keepRatioColumns, this.testRatio, this.ratios, this.nRandomStates, this.allowedDeviation);
+    this.backend.startSubsampling(sessionId, this.filename, this.keepRatioColumns, this.testRatio, this.ratios, this.nRandomStates, this.allowedDeviation).then(() => {
+      // @ts-ignore
+      $.toast({
+        position: 'top center',
+        title: 'Subsampling done',
+        class: 'center aligned success',
+        className: {
+          toast: 'ui message'
+        },
+        showProgress: 'bottom',
+        classProgress: 'green',
+        // progressUp: true,
+        displayTime: 5000,
+        message: `Subsampling finished successfully. You can now inspect the results and train classifiers.`
+      });
+    }).catch((response) => {
+      console.log('errorResponse', response)
+      // @ts-ignore
+      $.toast({
+        position: 'top center',
+        title: 'Subsampling error',
+        class: 'center aligned error',
+        className: {
+          toast: 'ui message'
+        },
+        showProgress: 'bottom',
+        classProgress: 'red',
+        // progressUp: true,
+        displayTime: 5000,
+        message: `An error occured while subssampling.`
+      });
+    });
   }
 
   public setRatioInput() {

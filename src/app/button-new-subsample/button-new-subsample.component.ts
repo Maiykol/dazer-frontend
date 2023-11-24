@@ -23,6 +23,7 @@ export class ButtonNewSubsampleComponent implements OnInit {
   }
 
   public openSubsampleModal(event: any) {
+    console.log('click')
     this.data.subsamplingModalFilename = this.filename;
     event.stopPropagation();
   }

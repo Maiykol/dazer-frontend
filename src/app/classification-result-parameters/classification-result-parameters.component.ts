@@ -26,7 +26,6 @@ export class ClassificationResultParametersComponent implements OnInit {
   public async init() {
     // load subsampling result data
     this.classificationResult = await this.backend.getClassificationResult(this.classificationId);
-    console.log(this.classificationResult)
   }
 
 }
