@@ -56,6 +56,11 @@
                         <label>Allowed deviation</label>
                         <input type="number" name="allowedDeviation" max="1" min="0.0" step="0.1" [(ngModel)]="allowedDeviation" />
                     </div>
+
+                    <div class="field transition hidden">
+                        <label>Allow zero occurrences</label>
+                        <input type="checkbox" name="allowZeroOccurrenes" [(ngModel)]="allowZeroOccurrenes" />
+                    </div>
                 </div>
             </div>
         </form>

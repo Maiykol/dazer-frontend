@@ -26,6 +26,7 @@ export class SubsamplingModalComponent implements OnInit {
   public nRandomStates: number = 1; // user input for number of random states
   public crossValidationK: number = 2;
   public allowedDeviation: number = 0.2;
+  public allowZeroOccurrenes = false;
  
   private async setFileName(filename: string) {
     if (filename === '') {
@@ -127,7 +128,7 @@ export class SubsamplingModalComponent implements OnInit {
 
   public async subsampleModalSuccess() {
     const sessionId = await this.storage.get('sessionId');
-    this.backend.startSubsampling(sessionId, this.filename, this.keepRatioColumns, this.testRatio, this.ratios, this.nRandomStates, this.allowedDeviation).then(() => {
+    this.backend.startSubsampling(sessionId, this.filename, this.keepRatioColumns, this.testRatio, this.ratios, this.nRandomStates, this.allowedDeviation, this.allowZeroOccurrenes).then(() => {
       // @ts-ignore
       $.toast({
         position: 'top center',

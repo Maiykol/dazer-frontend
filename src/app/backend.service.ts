@@ -57,14 +57,15 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public startSubsampling(sessionId: string, filename: string, keepRatioColumns: string[], testRatio: number, ratios: number[], nRandomStates: number, allowedDeviation: number): Promise<any> {
+  public startSubsampling(sessionId: string, filename: string, keepRatioColumns: string[], testRatio: number, ratios: number[], nRandomStates: number, allowedDeviation: number, allowZeroOccurrenes: boolean): Promise<any> {
     const request = `${this.API}subsample/${sessionId}/${filename}`;
     const payload = {
       keepRatioColumns,
       testRatio,
       ratios,
       nRandomStates,
-      allowedDeviation
+      allowedDeviation,
+      allowZeroOccurrenes
     }
     return this.postRequest(request, payload);
   }
