@@ -6,7 +6,7 @@
         Subsampling
       </h1>
       <h2>...has never been easier!</h2>
-      <input type="file" id="fileUpload" class="ui invisible file input" #fileInput (change)="onFileInput(fileInput.files)">
+      <input type="file" id="fileUpload" class="ui invisible file input" #fileInput (change)="onFileInput(fileInput.files)" [disabled]="fileUploadingFlag">
         <label for="fileUpload" class="ui primary icon button">
           <i *ngIf="fileUploadingFlag" class="loading spinner icon"></i>
           <i *ngIf="!fileUploadingFlag" class="file icon"></i>

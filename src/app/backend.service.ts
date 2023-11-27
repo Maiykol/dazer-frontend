@@ -101,4 +101,9 @@ export class BackendService {
     return this.getRequest(request);
   }
 
+  public deleteFile(sessionId: string, filename: string): Promise<any> {
+    const request = `${this.API}delete/file/${sessionId}/${filename}`;
+    return this.getRequest(request);
+  }
+
 }

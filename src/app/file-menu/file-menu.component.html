@@ -13,9 +13,9 @@
                     </app-button-new-subsample>
                     <app-button-delete
                         buttonClasses="tiny tertiary"
-                        path="delete/file/{{ this.sessionId }}/{{
-                            file.filename
-                        }}">
+                        type="file"
+                        [filename]="file.filename"
+                        >
                     </app-button-delete>
             </div>
             </div>
