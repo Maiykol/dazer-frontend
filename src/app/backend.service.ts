@@ -80,13 +80,14 @@ export class BackendService {
     return this.getRequest(request);
   }
 
-  public startClassificationTask(subsampleId: string, targetColumn: string, targetValue: string, crossValidationK: number, nRandomStates: number): Promise<any> {
+  public startClassificationTask(subsampleId: string, targetColumn: string, targetValue: string, crossValidationK: number, nRandomStates: number, scoring: string): Promise<any> {
     const request = `${this.API}classification/${subsampleId}`;
     const payload = {
       targetColumn,
       targetValue,
       crossValidationK,
-      nRandomStates
+      nRandomStates,
+      scoring
     }
     return this.postRequest(request, payload);
   }

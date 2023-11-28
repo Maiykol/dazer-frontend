@@ -32,8 +32,8 @@
                             ">
                             <div
                                 class="item"
-                                attr.data-value="{{col.key}}"
-                                attr.data-text="{{col.key}}">
+                                attr.data-value="{{ col.key }}"
+                                attr.data-text="{{ col.key }}">
                                 {{ col.key }}
                             </div>
                         </ng-container>
@@ -46,17 +46,14 @@
                 <div
                     class="ui fluid search selection dropdown"
                     id="targetValueDropdown">
-                    <input type="hidden" name="receipt" />
+                    <input type="hidden" name="targetValue" />
                     <i class="dropdown icon"></i>
                     <div class="default text"
                         >Select the target column first</div
                     >
                     <div class="menu">
                         <ng-container *ngFor="let value of targetColumnValues">
-                            <div
-                                class="item"
-                                attr.data-value="{{value}}"
-                                >
+                            <div class="item" attr.data-value="{{ value }}">
                                 {{ value }}
                             </div>
                         </ng-container>
@@ -64,23 +61,51 @@
                 </div>
             </div>
 
-            <div class="ui accordion"> <!-- styled fluid  -->
+            <div class="ui accordion">
+                <!-- styled fluid  -->
                 <div class="title">
                     <i class="dropdown icon"></i>
                     Options
                 </div>
                 <div class="content">
-
                     <div class="field transition hidden">
                         <label>Cross validation k</label>
-                        <select class="ui selection dropdown" name="crossValidationK" [(ngModel)]="crossValidationK" id="crossValidationK">
+                        <select
+                            class="ui selection dropdown"
+                            name="crossValidationK"
+                            [(ngModel)]="crossValidationK"
+                            id="crossValidationK">
+                        </select>
+                    </div>
+
+                     <div class="field">
+                        <label>Scoring metric for cross validation <a
+                                    href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter"
+                                    target="_blank"
+                                    >(more information)</a
+                                >.</label>
+                                               <select
+                            class="ui selection dropdown"
+                            name="scoring"
+                            [(ngModel)]="scoring"
+                            id="scoringSelect">
                         </select>
                     </div>
 
                     <div class="field transition hidden">
-                        <label>Iterations (with different seeds; select a value from 1 to 5)</label>
-                        <input type="number" name="nRandomStates" max="5" min="1" step="1" [(ngModel)]="nRandomStates" />
+                        <label
+                            >Iterations (with different seeds; select a value
+                            from 1 to 5)</label
+                        >
+                        <input
+                            type="number"
+                            name="nRandomStates"
+                            max="5"
+                            min="1"
+                            step="1"
+                            [(ngModel)]="nRandomStates" />
                     </div>
+                   
                 </div>
             </div>
         </form>

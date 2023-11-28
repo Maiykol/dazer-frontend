@@ -20,6 +20,8 @@ export class ClassificationModalComponent implements OnInit {
   public subsamplingId: string = '';
   public crossValidationK: number = 2;
   public nRandomStates: number = 1;
+  public scoring: string = 'f1';
+
 
   @Input() set setSubsamplingId(subsamplingId: string) {
     this.subsamplingId = subsamplingId;
@@ -101,10 +103,37 @@ export class ClassificationModalComponent implements OnInit {
         ]
       });
 
+    $('.ui.dropdown#scoringSelect')
+      .dropdown({
+        values: [
+          {
+            name: 'f1',
+            value: 'f1',
+            selected: true
+          },
+          {
+            name: 'accuracy',
+            value: 'accuracy',
+          }, {
+            name: 'balanced_accuracy',
+            value: 'balanced_accuracy',
+          }, {
+            name: 'precision',
+            value: 'precision',
+          }, {
+            name: 'recall',
+            value: 'recall',
+          }, {
+            name: 'roc_auc',
+            value: 'roc_auc',
+          },
+        ]
+      });
+
   }
 
   public async classificationModalSuccess() {
-    const response = await this.backend.startClassificationTask(this.subsamplingId, this.targetColumn, this.targetColumnTargetValue, this.crossValidationK, this.nRandomStates);
+    const response = await this.backend.startClassificationTask(this.subsamplingId, this.targetColumn, this.targetColumnTargetValue, this.crossValidationK, this.nRandomStates, this.scoring);
   }
 
 
