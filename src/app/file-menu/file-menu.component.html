@@ -5,8 +5,17 @@
                 <i class="dropdown icon"></i>
                 <i class="file icon"></i>
                 <span class="bold"> File: {{ file.filename }} </span>
-                <div class="accordion-description-spacing description"
-                    >
+                <div class="accordion-description-spacing description">
+                    <div
+                        *ngIf="file.rowsRemoved"
+                        class="ui info mini message compact accordion-message">
+                        <div class="header">
+                            <i class="exclamation circle icon"></i
+                            >{{ file.rowsRemoved }} rows removed
+                        </div>
+                        <p>because they contained NaN values.</p>
+                    </div>
+                    <br />
                     <app-button-new-subsample
                         buttonClasses="tiny tertiary"
                         filename="{{ file.filename }}">
@@ -14,10 +23,9 @@
                     <app-button-delete
                         buttonClasses="tiny tertiary"
                         type="file"
-                        [filename]="file.filename"
-                        >
+                        [filename]="file.filename">
                     </app-button-delete>
-            </div>
+                </div>
             </div>
             <div class="content">
                 <div class="basic styled accordion">
@@ -27,7 +35,11 @@
                             <i class="dropdown icon"></i>
                             <i class="block layout icon"></i>
                             <span class="bold">
-                                Subsample: {{ subsampleTask.timestamp  * 1000 | date: 'yyyy/MM/dd h:mm:ss a'}}
+                                Subsample:
+                                {{
+                                    subsampleTask.timestamp * 1000
+                                        | date : 'yyyy/MM/dd h:mm:ss a'
+                                }}
                             </span>
                             <div
                                 class="accordion-description-spacing description">
@@ -40,7 +52,9 @@
                                 <app-button-delete
                                     buttonClasses="tiny tertiary"
                                     type="subsample"
-                                    [subsampleId]="subsampleTask.subsampleTaskId">
+                                    [subsampleId]="
+                                        subsampleTask.subsampleTaskId
+                                    ">
                                 </app-button-delete>
                                 <app-button-share
                                     buttonClasses="tiny tertiary"
@@ -56,12 +70,20 @@
                                         let classificationTask of subsampleTask.classificationTasks
                                     ">
                                     <div class="item">
-                                        <div class="content ui classification segment" [ngClass]="{'red tertiary inverted' : classificationTask.error}">
+                                        <div
+                                            class="content ui classification segment"
+                                            [ngClass]="{
+                                                'red tertiary inverted':
+                                                    classificationTask.error
+                                            }">
                                             <div class="header">
                                                 <i class="crosshairs icon"></i>
                                                 Classification:
                                                 {{
-                                                    classificationTask.timestamp  * 1000 | date: 'yyyy/MM/dd h:mm:ss a'
+                                                    classificationTask.timestamp *
+                                                        1000
+                                                        | date
+                                                            : 'yyyy/MM/dd h:mm:ss a'
                                                 }}</div
                                             >
                                             <div class="description">
@@ -76,7 +98,9 @@
                                                 <app-button-delete
                                                     buttonClasses="tiny tertiary"
                                                     type="classification"
-                                                    [subsampleId]="subsampleTask.classificationId">
+                                                    [subsampleId]="
+                                                        subsampleTask.classificationId
+                                                    ">
                                                 </app-button-delete>
                                                 <app-button-share
                                                     buttonClasses="tiny tertiary"
@@ -86,8 +110,13 @@
                                                         classificationTask.classificationId
                                                     }}"></app-button-share>
                                             </div>
-                                            {{classificationTask.progress}}
-                                            <div class="ui bottom attached active progress" [attr.data-percent]="classificationTask.progress * 100">
+                                            {{ classificationTask.progress }}
+                                            <div
+                                                class="ui bottom attached active progress"
+                                                [attr.data-percent]="
+                                                    classificationTask.progress *
+                                                    100
+                                                ">
                                                 <div class="bar"></div>
                                             </div>
                                         </div>
