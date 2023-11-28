@@ -106,4 +106,14 @@ export class BackendService {
     return this.getRequest(request);
   }
 
+  public deleteSubsample(subsampleId: string): Promise<any> {
+    const request = `${this.API}delete/subsample/${subsampleId}`;
+    return this.getRequest(request);
+  }
+
+  public deleteClassification(classificationId: string): Promise<any> {
+    const request = `${this.API}delete/classification/${classificationId}`;
+    return this.getRequest(request);
+  }
+
 }

@@ -18,6 +18,8 @@ export class ButtonDeleteComponent implements OnInit {
   @Input() buttonClasses: string = ''
   @Input() type: 'file' | 'subsample' | 'session' | 'classification' = 'file';
   @Input() filename: string = '';
+  @Input() subsampleId: string = '';
+  @Input() classificationId: string = '';
 
   @ViewChild('deleteModal') deleteModal: any;
 
@@ -42,10 +44,18 @@ export class ButtonDeleteComponent implements OnInit {
   }
 
   public async delete() {
-
     if (this.type === 'file') {
       const sessionId = await this.storage.get('sessionId');
       await this.backend.deleteFile(sessionId, this.filename);
+    }
+    else if (this.type === 'subsample') {
+      await this.backend.deleteSubsample(this.subsampleId);
+    }
+    else if (this.type === 'classification') {
+      await this.backend.deleteClassification(this.classificationId);
+    } else {
+      console.log('should not reach this');
+      return
     }
     this.buttonText = this.buttonTextActive;
   }

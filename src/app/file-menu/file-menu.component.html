@@ -39,9 +39,8 @@
                                 </app-button-show>
                                 <app-button-delete
                                     buttonClasses="tiny tertiary"
-                                    path="delete/subsample/{{
-                                        subsampleTask.subsampleTaskId
-                                    }}">
+                                    type="subsample"
+                                    [subsampleId]="subsampleTask.subsampleTaskId">
                                 </app-button-delete>
                                 <app-button-share
                                     buttonClasses="tiny tertiary"
@@ -76,11 +75,9 @@
                                                 </app-button-show>
                                                 <app-button-delete
                                                     buttonClasses="tiny tertiary"
-                                                    path="delete/classification/{{
-                                                        classificationTask.classificationId
-                                                    }}">
+                                                    type="classification"
+                                                    [subsampleId]="subsampleTask.classificationId">
                                                 </app-button-delete>
-
                                                 <app-button-share
                                                     buttonClasses="tiny tertiary"
                                                     path="subsampling/{{
