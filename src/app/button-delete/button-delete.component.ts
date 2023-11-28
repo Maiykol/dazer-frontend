@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { BackendService } from '../backend.service';
 import { StorageService } from '../storage.service';
 
@@ -19,22 +19,35 @@ export class ButtonDeleteComponent implements OnInit {
   @Input() type: 'file' | 'subsample' | 'session' | 'classification' = 'file';
   @Input() filename: string = '';
 
+  @ViewChild('deleteModal') deleteModal: any;
+
   constructor(private backend: BackendService, private storage: StorageService ) { }
 
   ngOnInit(): void {
 
   }
 
-  public async delete(event: any) {
+  public modalConfirmation(event: any) {
+    $(this.deleteModal.nativeElement).modal({
+        closable: true,
+        onDeny: function () {
+        },
+        onApprove: () => {
+          this.delete();
+        }
+      })
+      .modal('show')
+      ;
+    event.stopPropagation();
+  }
+
+  public async delete() {
 
     if (this.type === 'file') {
       const sessionId = await this.storage.get('sessionId');
       await this.backend.deleteFile(sessionId, this.filename);
     }
-
     this.buttonText = this.buttonTextActive;
-
-    event.stopPropagation();
   }
 
 }

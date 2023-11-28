@@ -1,3 +1,15 @@
-<button class="ui red button {{buttonClasses}}" (click)="delete($event)"><i class="trash icon"></i>{{
+<button class="ui red button {{buttonClasses}}" (click)="modalConfirmation($event)"><i class="trash icon"></i>{{
     buttonText
 }}</button>
+
+
+<div class="ui mini modal" #deleteModal>
+  <div class="header">Delete <span *ngIf="filename">{{filename}}</span></div>
+  <div class="content">
+    <p>Are you sure?</p>
+  </div>
+  <div class="actions">
+    <div class="ui approve red button"> <i class="trash icon"></i> Delete</div>
+    <div class="ui cancel secondary button">Cancel</div>
+  </div>
+</div>
